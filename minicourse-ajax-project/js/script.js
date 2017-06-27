@@ -34,8 +34,12 @@ function loadData() {
 
     $.getJSON(url, function(data) {
         var items = [];
-        $.each( data, function( key, val ) {
-            console.log("key: " + key + "\nval: " + val);
+        $.each( data.response.docs, function( i, data ) {
+            var web_url = data.web_url;
+            var headline = data.headline.print_headline;
+            var snippet = data.snippet;
+
+            $('#nytimes-articles').append('<li class="article"> <a href="'+web_url+'">'+headline+'</a> <p>'+snippet+'</p></li>');
         });
     });
 
