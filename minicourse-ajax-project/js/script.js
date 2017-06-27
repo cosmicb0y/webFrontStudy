@@ -36,7 +36,7 @@ function loadData() {
         var items = [];
         $.each( data.response.docs, function( i, data ) {
             var web_url = data.web_url;
-            var headline = data.headline.print_headline;
+            var headline = data.headline.main;
             var snippet = data.snippet;
 
             $('#nytimes-articles').append('<li class="article"> <a href="'+web_url+'">'+headline+'</a> <p>'+snippet+'</p></li>');
