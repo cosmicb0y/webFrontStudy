@@ -41,6 +41,8 @@ function loadData() {
 
             $('#nytimes-articles').append('<li class="article"> <a href="'+web_url+'">'+headline+'</a> <p>'+snippet+'</p></li>');
         });
+    }).error(function() {
+        $('#nytimes-header').text('New York Times Articles Could Not Be Loaded');
     });
 
     return false;
