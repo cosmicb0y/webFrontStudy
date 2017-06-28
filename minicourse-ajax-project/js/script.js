@@ -47,14 +47,15 @@ function loadData() {
     });
 
     $.ajax({
-        url: 'https://en.wikipedia.org/w/api.php?action=query&titles='+ cityStr+'&prop=info&inprop=url&format=json',
+        url: 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+cityStr+'&format=json&callback=wikiCallback',
         dataType: "jsonp",
-        success: function(data){
-            for (var key in data.query.pages){
-              var title = data.query.pages[key].title;
-              var full_url = data.query.pages[key].fullurl;
-              $wikiElem.append('<li><a href="'+full_url+'">'+title+'</li>');
-            };
+        success: function(response){
+            var articleList = response[1];
+            for (var i = 0; i < articleList.length; i++) {
+                var articleStr = articleList[i];
+                var wikiUrl = 'http://en.wikipedia.org/wiki/' + articleStr;
+                $wikiElem.append('<li><a href="'+wikiUrl+'">'+articleStr+'</li>');
+            }
         }
     });
 
