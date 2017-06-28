@@ -46,6 +46,10 @@ function loadData() {
         $nytHeaderElem.text('New York Times Articles Could Not Be Loaded');
     });
 
+    var wikiRequestTimeout = setTimeout( function() {
+        $wikiElem.text("failed to get wikipedia resources.");
+    }, 8000);
+
     $.ajax({
         url: 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+cityStr+'&format=json&callback=wikiCallback',
         dataType: "jsonp",
@@ -56,6 +60,7 @@ function loadData() {
                 var wikiUrl = 'http://en.wikipedia.org/wiki/' + articleStr;
                 $wikiElem.append('<li><a href="'+wikiUrl+'">'+articleStr+'</li>');
             }
+            clearTimeout(wikiRequestTimeout);
         }
     });
 
