@@ -22,6 +22,7 @@ function loadData() {
     var streetviewUrl = 'http://maps.googleapis.com/maps/api/streetview?size=600x400&location=' + address + '';
 
     $body.append('<img class="bgimg" src="' + streetviewUrl + '">');
+
     // YOUR CODE GOES HERE!
 
     var myKey = config.NYTIMES_KEY;
@@ -43,6 +44,18 @@ function loadData() {
         });
     }).error(function() {
         $nytHeaderElem.text('New York Times Articles Could Not Be Loaded');
+    });
+
+    $.ajax({
+        url: 'https://en.wikipedia.org/w/api.php?action=query&titles='+ cityStr+'&prop=info&inprop=url&format=json',
+        dataType: "jsonp",
+        success: function(data){
+            for (var key in data.query.pages){
+              var title = data.query.pages[key].title;
+              var full_url = data.query.pages[key].fullurl;
+              $wikiElem.append('<li><a href="'+full_url+'">'+title+'</li>');
+            };
+        }
     });
 
     return false;
