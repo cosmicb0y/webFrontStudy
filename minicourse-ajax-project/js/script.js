@@ -39,10 +39,10 @@ function loadData() {
             var headline = data.headline.main;
             var snippet = data.snippet;
 
-            $('#nytimes-articles').append('<li class="article"> <a href="'+web_url+'">'+headline+'</a> <p>'+snippet+'</p></li>');
+            $nytElem.append('<li class="article"> <a href="'+web_url+'">'+headline+'</a> <p>'+snippet+'</p></li>');
         });
     }).error(function() {
-        $('#nytimes-header').text('New York Times Articles Could Not Be Loaded');
+        $nytHeaderElem.text('New York Times Articles Could Not Be Loaded');
     });
 
     return false;
